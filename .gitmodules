@@ -1,0 +1,3 @@
+[submodule "lib/ZiaModuleAPISpec"]
+	path = lib/ZiaModuleAPISpec
+	url = git@github.com:demaisj/ZiaModuleAPISpec.git
