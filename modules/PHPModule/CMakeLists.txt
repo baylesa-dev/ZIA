@@ -8,7 +8,7 @@ if (MSVC)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/../Modules")
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/../Modules")
 else()
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../../Modules)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../../build/modules)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)

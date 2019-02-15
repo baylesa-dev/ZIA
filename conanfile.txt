@@ -1,5 +1,5 @@
 [requires]
-boost_asio/1.69.0@bincrafters/stable
+boost/1.68.0@conan/stable
 
 [generators]
 cmake
