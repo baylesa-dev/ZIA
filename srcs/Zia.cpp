@@ -11,28 +11,28 @@ Zia::Zia::Zia()
 
 Zia::Zia::~Zia()
 {
-    if (*_run == true)
+    if (*_run == true) {
+        std::cout << "A server is running !" << std::endl;
         _server->join();
+    }
 }
 
 void Zia::Zia::startServer()
 {
+    bool *test = _run;
     if (*_run == true) {
         std::cout << "A server is already running !" << std::endl;
         return;
     }
-    bool *test = _run;
-
     *_run = true;
     _server = new std::thread([test]() {
         Server *server = new Server();
         while (1) {
             if (*test == false) {
-                std::cout << "Stop thread !" << std::endl;
+                std::cout << "[Server] Stop thread !" << std::endl;
                 delete server;
                 return (0);
             }
-            server->close();
         }
     });
 }
