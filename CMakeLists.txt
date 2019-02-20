@@ -14,6 +14,7 @@ conan_basic_setup()
 
 # Modules
 add_subdirectory(modules/PHPModule PHPModule)
+add_subdirectory(lib/ZiaModuleAPISpec ZiaModuleAPISpec)
 
 # Zia
 include_directories(
@@ -25,9 +26,10 @@ set(SOURCE_FILES
     srcs/main.cpp
     srcs/Server.cpp
     srcs/Zia.cpp
+    srcs/Cmd.cpp
 )
 
 add_executable(zia ${SOURCE_FILES})
 
 # DEBUG ONLY!!
-target_link_libraries(zia PHPModule ${CONAN_LIBS})
+target_link_libraries(zia PHPModule ZiaModuleAPISpec ${CONAN_LIBS})
