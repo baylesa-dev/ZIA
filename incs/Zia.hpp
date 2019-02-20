@@ -8,6 +8,7 @@
 #pragma once
 
 #include <thread>
+#include <vector>
 
 namespace Zia
 {
@@ -17,9 +18,11 @@ class Zia
   public:
     Zia();
     ~Zia();
+    void runCli();
     void startServer();
     void stopServer();
     void forceStopServer();
+    bool getRun();
 
   protected:
   private:

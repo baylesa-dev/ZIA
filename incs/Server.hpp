@@ -19,9 +19,6 @@ class Server
   public:
     Server();
     ~Server();
-    void close();
-    void getModule();
-    int getStatus();
 
   protected:
   private:
