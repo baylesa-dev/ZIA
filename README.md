@@ -16,6 +16,12 @@ conan remote add epitech https://api.bintray.com/conan/epitech/public-conan
 conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 ```
 
+### Pull submodules
+
+```sh
+git submodule update --init --recursive
+```
+
 ### Build
 
 In the project root dir :
