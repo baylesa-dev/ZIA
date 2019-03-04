@@ -8,6 +8,7 @@
 #pragma once
 
 #include <thread>
+#include <vector>
 #include "API.hpp"
 #include "pugixml.hpp"
 #define VERSION "1.0.0"
@@ -31,9 +32,11 @@ class Zia
     ~Zia();
     void setConfig();
     void printStartMessage();
+    void runCli();
     void startServer();
     void stopServer();
     void forceStopServer();
+    bool getRun();
 
   protected:
   private:
