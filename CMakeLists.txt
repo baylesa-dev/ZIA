@@ -25,6 +25,7 @@ include_directories(
 set(SOURCE_FILES
     srcs/main.cpp
     srcs/Server.cpp
+    srcs/ServerClient.cpp
     srcs/Zia.cpp
     srcs/Cmd.cpp
 )

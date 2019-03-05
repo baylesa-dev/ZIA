@@ -29,9 +29,7 @@ void Zia::Zia::runCli()
     Cmd cmd(this);
 
     this->startServer();
-    std::cout << "Cli start" << std::endl;
     while (1) {
-        std::cout << ">";
         std::getline(std::cin, str);
         cmd.runCmd(str);
     }
@@ -70,23 +68,13 @@ void Zia::Zia::printStartMessage()
 
 void Zia::Zia::startServer()
 {
-    bool *test = _run;
-
     if (*_run == true) {
         std::cout << "A server is already running !" << std::endl;
         return;
     }
     *_run = true;
-    std::cout << "Start server !" << std::endl;
-    _server = new std::thread([test]() {
-        Server *server = new Server();
-        while (1) {
-            if (*test == false) {
-                delete server;
-                return (0);
-            }
-            sleep(1);
-        }
+    _server = new std::thread([]() {
+        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server);
     });
 }
 
@@ -102,7 +90,8 @@ void Zia::Zia::stopServer()
 {
     std::cout << "Stop server !" << std::endl;
     *_run = false;
-    _server->join();
+    //Debug change for ->join() when fix
+    _server->detach();
     delete _server;
 }
 

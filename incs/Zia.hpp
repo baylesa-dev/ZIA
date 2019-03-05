@@ -9,6 +9,8 @@
 
 #include <thread>
 #include <vector>
+#include <memory>
+#include "Server.hpp"
 #include "API.hpp"
 #include "pugixml.hpp"
 #define VERSION "1.0.0"
