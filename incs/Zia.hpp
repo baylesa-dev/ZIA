@@ -9,6 +9,8 @@
 
 #include <thread>
 #include <vector>
+#include <memory>
+#include "Server.hpp"
 
 namespace Zia
 {
@@ -26,8 +28,8 @@ class Zia
 
   protected:
   private:
-    std::thread *_server;
-    bool *_run;
+          std::thread *_server;
+          bool *_run;
 };
 
 } // namespace Zia
