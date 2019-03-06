@@ -1,0 +1,7 @@
+<server name="Zia" version="1.0.0">
+        <config>
+                <exampleModule>
+                        <!-- NOTHING MORE THAN ATTRIBUTE VALUES -->
+                </exampleModule>
+        </config>
+</server>
