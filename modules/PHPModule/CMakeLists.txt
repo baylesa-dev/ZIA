@@ -11,10 +11,12 @@ else()
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../../build/modules)
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
+include_directories(
+    ../../lib/ZiaModuleAPISpec/include/Zia
+)
 
 set(SOURCE_FILES
-    srcs/PHPModule.cpp
+    factory.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
