@@ -5,6 +5,10 @@
 ** Server cpp
 */
 
+#include <vector>
+#include <string>
+
+#include "LoadModules.hpp"
 #include "Server.hpp"
 #include "ServerClient.hpp"
 
@@ -15,6 +19,16 @@ Zia::Server::Server()
         , _socket(io_service_g)
 {
         std::cout << "New Server !" << std::endl;
+
+        // test
+        LoadModules moduleLoader;
+        API::ServerConfig cfg;
+        std::vector<std::string> allModulesPath;
+        allModulesPath.push_back("/home/marius/Epitech/project/CPP_zia_2018/build/lib/zia-PHPModule.so");
+        moduleLoader.loadAllModules(_allModule, allModulesPath, cfg);
+        moduleLoader.closeAllModules(_allModule);
+        //
+
         start();
 }
 

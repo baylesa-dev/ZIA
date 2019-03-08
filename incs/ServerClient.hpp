@@ -23,7 +23,7 @@ class ServerClient
 public:
         ServerClient(boost::asio::ip::tcp::socket socket,
                 std::string ip,
-                std::vector<std::shared_ptr<API::Module>> allModule);
+                std::vector<API::Module::pointer> allModule);
         ~ServerClient();
         void start();
 protected:
