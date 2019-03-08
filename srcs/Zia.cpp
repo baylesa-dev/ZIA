@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2019
+** Zia
+** File description:
+** Zia cpp
+*/
+
 #include <thread>
 #include <iostream>
 #include <fstream>
@@ -68,6 +75,8 @@ void Zia::Zia::printStartMessage()
 
 void Zia::Zia::startServer()
 {
+    bool *run = _run;
+
     if (*_run == true) {
         std::cout << "A server is already running !" << std::endl;
         return;
@@ -90,7 +99,7 @@ void Zia::Zia::stopServer()
 {
     std::cout << "Stop server !" << std::endl;
     *_run = false;
-    //Debug change for ->join() when fix
+    // TODO change detach for join
     _server->detach();
     delete _server;
 }

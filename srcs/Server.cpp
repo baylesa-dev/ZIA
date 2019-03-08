@@ -25,12 +25,15 @@ Zia::Server::~Server()
 
 void Zia::Server::stop()
 {
+    std::cout << "Oui" << std::endl;
+        io_service_g.stop();
 }
 
 void Zia::Server::start()
 {
-        accept();
-        io_service_g.run();
+    //loadModules();
+    accept();
+    io_service_g.run();
 }
 
 void Zia::Server::accept()

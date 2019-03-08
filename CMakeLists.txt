@@ -28,6 +28,7 @@ set(SOURCE_FILES
     srcs/ServerClient.cpp
     srcs/Zia.cpp
     srcs/Cmd.cpp
+    srcs/RequestsHandler.cpp
 )
 
 add_executable(zia ${SOURCE_FILES})
