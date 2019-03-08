@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-#include "API.hpp"
+#include "Zia/API.hpp"
 #include "PHPModule.hpp"
 
 ZIA_API_EXPORT Zia::API::Module::pointer factory()
