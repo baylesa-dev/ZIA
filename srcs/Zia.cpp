@@ -84,6 +84,7 @@ void Zia::Zia::startServer()
     *_run = true;
     _server = new std::thread([]() {
         std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server);
+        //serverPtr->stop();
     });
 }
 
