@@ -17,7 +17,7 @@ namespace Zia
     class RequestsHandler
     {
     public:
-        RequestsHandler(std::vector<std::shared_ptr<API::Module>> modules);
+        RequestsHandler(std::vector<API::Module::pointer> modules);
         ~RequestsHandler();
         void onConnectionStart(const API::Connection& conn, boost::asio::ip::tcp::socket& sock);
         void onConnectionEnd(const API::Connection& conn, boost::asio::ip::tcp::socket& sock);

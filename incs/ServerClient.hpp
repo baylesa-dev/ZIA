@@ -21,17 +21,17 @@ namespace Zia
 class ServerClient
 {
 public:
-        ServerClient(boost::asio::ip::tcp::socket socket,
+    ServerClient(boost::asio::ip::tcp::socket socket,
                 std::string ip,
                 unsigned short port,
                 std::shared_ptr<RequestsHandler> requestsHandler);
-        ~ServerClient();
-        void start();
+    ~ServerClient();
+    void start();
 protected:
 private:
-        API::Connection _connection;
-        boost::asio::ip::tcp::socket _socket;
-        std::shared_ptr<RequestsHandler> _requestsHanler;
-        API::ServerConfig _config;
+    API::Connection _connection;
+    boost::asio::ip::tcp::socket _socket;
+    std::shared_ptr<RequestsHandler> _requestsHanler;
+    API::ServerConfig _config;
 };
 } // namespace Zia

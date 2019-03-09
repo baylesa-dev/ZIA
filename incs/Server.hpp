@@ -46,8 +46,8 @@ class Server
 
   protected:
   private:
-      API::ServerConfig _config;
-      unsigned short _port;
+    API::ServerConfig _config;
+    unsigned short _port;
     std::shared_ptr<RequestsHandler> _requestsHanler;
     std::vector<API::Module::pointer> _allModule;
     boost::asio::ip::tcp::socket _socket;

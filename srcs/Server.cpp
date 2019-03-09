@@ -22,7 +22,7 @@ Zia::Server::Server()
     std::shared_ptr<RequestsHandler> _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
     setConfig();
     printStartMessage();
-    
+
     // test
     LoadModules moduleLoader;
     API::ServerConfig cfg;
@@ -75,50 +75,26 @@ void Zia::Server::setPlatform()
         case 2 : _config.platform = API::ServerConfig::Platform::Macos;
             break;
     }
-
 }
 
 void Zia::Server::printStartMessage()
 {
-        std::cout << "Server name : " << _config.name << std::endl;
-        std::cout << "Server Version :" << _config.version << std::endl << std::endl;
-        std::cout << _port << std::endl;
-        std::cout << " _______   _ " << std::endl;
-        std::cout << "|_  /_ _| /_\\"  << std::endl;
-        std::cout << " / / | | / _ \\"  << std::endl;
-        std::cout << "/___|___/_/ \\_\\" << std::endl << std::endl;
+    std::cout << "Server name : " << _config.name << std::endl;
+    std::cout << "Server Version :" << _config.version << std::endl << std::endl;
+    std::cout << _port << std::endl;
+    std::cout << " _______   _ " << std::endl;
+    std::cout << "|_  /_ _| /_\\"  << std::endl;
+    std::cout << " / / | | / _ \\"  << std::endl;
+    std::cout << "/___|___/_/ \\_\\" << std::endl << std::endl;
 }
 
 void Zia::Server::stop()
 {
-        io_service_g.stop();
+    io_service_g.stop();
 }
 
 void Zia::Server::start()
 {
-<<<<<<< srcs/Server.cpp
-    //loadModules();
-    accept();
-    io_service_g.run_one();
-}
-
-void Zia::Server::accept()
-	{
-		_acceptor.async_accept(_socket,
-			[this](boost::system::error_code err)
-		{
-			if (!err) {
-				std::string ip(_socket.remote_endpoint()
-					.address().to_string());
-				std::make_shared<ServerClient>(
-					std::move(_socket), ip,
-                    _port, this->_requestsHanler)->start();
-                std::cout << "New Connection !    IP : " << ip <<std::endl;
-			}
-			accept();
-		});
-	}
-=======
     accept();
     io_service_g.run();
 }
@@ -129,10 +105,11 @@ void Zia::Server::accept()
         [this](boost::system::error_code err) {
         if (!err) {
             std::string ip(_socket.remote_endpoint().address().to_string());
-            std::make_shared<ServerClient>(std::move(_socket), ip, this->_allModule)->start();
+            std::make_shared<ServerClient>(std::move(_socket),
+                                           ip, _port,
+                                           this->_requestsHanler)->start();
             std::cout << "New Connection !    IP : " << ip << std::endl;
         }
         accept();
     });
 }
->>>>>>> srcs/Server.cpp
