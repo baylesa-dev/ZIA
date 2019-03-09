@@ -48,8 +48,8 @@ class Server
   private:
       API::ServerConfig _config;
       unsigned short _port;
-    std::vector<std::shared_ptr<API::Module>> _allModule;
     std::shared_ptr<RequestsHandler> _requestsHanler;
+    std::vector<API::Module::pointer> _allModule;
     boost::asio::ip::tcp::socket _socket;
     boost::asio::ip::tcp::acceptor _acceptor;
 };

@@ -1,23 +1,8 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.0.2)
-project(PHPModule)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if (MSVC)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/../Modules")
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/../Modules")
-else()
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ../../build/modules)
-endif()
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/includes)
-
-set(SOURCE_FILES
-    srcs/PHPModule.cpp
+add_library(PHPModule MODULE
+    factory.cpp
 )
-
-add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-
-set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
-
+set_target_properties(PHPModule PROPERTIES PREFIX "zia-")
+target_link_libraries(PHPModule
+    ${CONAN_LIBS_BOOST}
+    ZiaModuleAPISpec
+)

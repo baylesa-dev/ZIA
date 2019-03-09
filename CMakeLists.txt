@@ -29,9 +29,11 @@ set(SOURCE_FILES
     srcs/Zia.cpp
     srcs/Cmd.cpp
     srcs/RequestsHandler.cpp
+    srcs/LoadModules.cpp
+    srcs/ParseRequest.cpp
 )
 
 add_executable(zia ${SOURCE_FILES})
 
 # DEBUG ONLY!!
-target_link_libraries(zia PHPModule ZiaModuleAPISpec ${CONAN_LIBS})
+target_link_libraries(zia ZiaModuleAPISpec ${CONAN_LIBS} dl)

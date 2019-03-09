@@ -5,6 +5,7 @@
 ** ServerClient cpp
 */
 
+#include "ParseRequest.hpp"
 #include "ServerClient.hpp"
 
 Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
@@ -20,9 +21,12 @@ Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
 
 Zia::ServerClient::~ServerClient()
 {
-        _socket.close();
+    _socket.close();
 }
 
 void Zia::ServerClient::start()
 {
+    ParseRequest parse(_socket);
+    // parsRequest lit le socket et ensuite remplie la struct reuqeste fait un getRequest pour l'avoir
+    parse.parsRequest();
 }
