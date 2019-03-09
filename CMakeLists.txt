@@ -29,6 +29,7 @@ set(SOURCE_FILES
     srcs/Zia.cpp
     srcs/Cmd.cpp
     srcs/LoadModules.cpp
+    srcs/parseRequest.cpp
 )
 
 add_executable(zia ${SOURCE_FILES})
