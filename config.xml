@@ -1,7 +1,7 @@
 <server name="Zia" version="1.0.0">
-        <config>
-                <exampleModule>
+        <modules>
+                <exampleModule config1="value1" other="thing" port="9966">
                         <!-- NOTHING MORE THAN ATTRIBUTE VALUES -->
                 </exampleModule>
-        </config>
+        </modules>
 </server>
