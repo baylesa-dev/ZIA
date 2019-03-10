@@ -15,10 +15,11 @@
 #include "API.hpp"
 #include "pugixml.hpp"
 #include "RequestsHandler.hpp"
+#include "LoadModules.hpp"
 
-#define DEFAULT_PORT 4242
 #define VERSION "1.0.0"
-#define CONFIGPATH "config.yml"
+#define CONFIG_PATH "config.xml"
+#define MODULE_PATH "modules/"
 
 #ifdef __linux__
 #       define PLATFORM 0
@@ -34,10 +35,11 @@ namespace Zia
 class Server
 {
   public:
-    Server();
+    Server(unsigned short port);
     ~Server();
     void setConfig();
     void setDefaultConfig();
+    void setModulesPath();
     void setPlatform();
     void printStartMessage();
     void stop();
@@ -50,6 +52,8 @@ class Server
     unsigned short _port;
     std::shared_ptr<RequestsHandler> _requestsHanler;
     std::vector<API::Module::pointer> _allModule;
+    std::vector<std::string> _allModulesPath;
+    LoadModules _moduleLoader;
     boost::asio::ip::tcp::socket _socket;
     boost::asio::ip::tcp::acceptor _acceptor;
 };

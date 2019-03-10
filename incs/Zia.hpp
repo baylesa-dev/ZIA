@@ -13,6 +13,9 @@
 #include "Server.hpp"
 #include "API.hpp"
 
+#define DEFAULT_PORT 4242
+#define CONFIG_PATH "config.xml"
+
 namespace Zia
 {
 
@@ -22,6 +25,7 @@ class Zia
     Zia();
     ~Zia();
     void runCli();
+    static unsigned short getPort();
     void startServer();
     void stopServer();
     void forceStopServer();

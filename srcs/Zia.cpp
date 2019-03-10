@@ -40,6 +40,18 @@ void Zia::Zia::runCli()
     }
 }
 
+unsigned short Zia::Zia::getPort()
+{
+    unsigned short port;
+
+    pugi::xml_document config;
+    pugi::xml_parse_result result = config.load_file(CONFIG_PATH);
+    port = (unsigned short) config.child("server").attribute("port").as_int();
+    if (port == 0)
+        port = DEFAULT_PORT;
+    return (port);
+}
+
 void Zia::Zia::startServer()
 {
     bool *run = _run;
@@ -49,8 +61,8 @@ void Zia::Zia::startServer()
         return;
     }
     *_run = true;
-    _server = new std::thread([]() {
-        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server);
+    _server = new std::thread([run]() {
+        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server(Zia::Zia::getPort()));
         //serverPtr->stop();
     });
 }
