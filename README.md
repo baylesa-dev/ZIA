@@ -36,6 +36,8 @@ mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && c
 ```sh
 ./zia [--config "./config.xml"] [--modules "./modules/"]
 ```
+All modules in modules path must be name this way : `` zia-YOUR_MODULE_NAME.so``
+
 ### Config Example
 
 ```xml
@@ -46,4 +48,3 @@ mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && c
         </modules>
 </server>
 ```
-All module must be name this way : `` zia-YOUR_MODULE_NAME.so``
