@@ -7,10 +7,12 @@
 
 #include <iostream>
 #include "Zia.hpp"
+#include "ArgsParser.hpp"
 
 int main(int ac, char **av)
 {
-    Zia::Zia zia;
-    
+    Zia::ArgsParser *arg = new Zia::ArgsParser(ac, av);
+    Zia::Zia zia(arg);
+
     zia.runCli();
 }
