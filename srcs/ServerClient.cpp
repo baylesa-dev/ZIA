@@ -21,7 +21,6 @@ Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
 
 Zia::ServerClient::~ServerClient()
 {
-    _socket.close();
 }
 
 void Zia::ServerClient::start()

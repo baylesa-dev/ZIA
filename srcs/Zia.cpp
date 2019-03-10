@@ -62,14 +62,13 @@ void Zia::Zia::startServer()
     }
     *_run = true;
     _server = new std::thread([run]() {
-        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server(Zia::Zia::getPort()));
-        //serverPtr->stop();
+        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server(run, Zia::Zia::getPort()));
+        serverPtr->start();
     });
 }
 
 void Zia::Zia::forceStopServer()
 {
-    std::cout << "Force stop server !" << std::endl;
     if (_server != NULL)
         _server->detach();
     *_run = false;
@@ -77,10 +76,8 @@ void Zia::Zia::forceStopServer()
 
 void Zia::Zia::stopServer()
 {
-    std::cout << "Stop server !" << std::endl;
     *_run = false;
-    // TODO change detach for join
-    _server->detach();
+    _server->join();
     delete _server;
 }
 

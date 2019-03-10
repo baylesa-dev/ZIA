@@ -49,6 +49,7 @@ void Zia::Cmd::_stop()
         }
         else
             _zia->stopServer();
+        std::cout << "Stop server !" << std::endl;
         exit(0);
     }
 }
@@ -58,6 +59,7 @@ void Zia::Cmd::_reload()
     if (_cmd.at(0) == "reload") {
         _zia->stopServer();
         _zia->startServer();
+        std::cout << "Reload server !" << std::endl;
     }
 }
 
@@ -80,7 +82,3 @@ void Zia::Cmd::_help()
             << "\tstatus" << std::endl;
     }
 }
-
-
-
-

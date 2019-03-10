@@ -35,7 +35,7 @@ namespace Zia
 class Server
 {
   public:
-    Server(unsigned short port);
+    Server(bool *run, unsigned short port);
     ~Server();
     void setConfig();
     void setDefaultConfig();
@@ -48,6 +48,7 @@ class Server
 
   protected:
   private:
+    bool *_run;
     API::ServerConfig _config;
     unsigned short _port;
     std::shared_ptr<RequestsHandler> _requestsHanler;

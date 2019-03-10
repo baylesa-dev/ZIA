@@ -33,6 +33,7 @@ class Zia
 
   protected:
   private:
+    boost::asio::io_service _io_service;
     std::thread *_server;
     bool *_run;
 };

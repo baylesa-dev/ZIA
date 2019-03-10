@@ -11,28 +11,25 @@
 #include "Server.hpp"
 #include "ServerClient.hpp"
 
-boost::asio::io_service io_service_g;
+boost::asio::io_service io_service;
 
-Zia::Server::Server(unsigned short port)
-    : _acceptor(io_service_g, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
-    , _socket(io_service_g)
+Zia::Server::Server(bool *run, unsigned short port)
+    : _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
+    , _socket(io_service)
     , _port(port)
+    , _run(run)
 {
     std::shared_ptr<RequestsHandler> _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
     setConfig();
     setModulesPath();
     printStartMessage();
-
     LoadModules moduleLoader;
     _moduleLoader = moduleLoader;
     _moduleLoader.loadAllModules(_allModule, _allModulesPath, _config);
-
-    start();
 }
 
 Zia::Server::~Server()
 {
-    _socket.close();
 }
 
 void Zia::Server::setConfig()
@@ -100,13 +97,15 @@ void Zia::Server::printStartMessage()
 void Zia::Server::stop()
 {
     _moduleLoader.closeAllModules(_allModule);
-    io_service_g.stop();
+    _socket.close();
 }
 
 void Zia::Server::start()
 {
     accept();
-    io_service_g.run();
+    while(*_run == true)
+        io_service.run_one();
+    stop();
 }
 
 void Zia::Server::accept()
