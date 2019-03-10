@@ -9,8 +9,7 @@
 
 #include "ParseRequest.hpp"
 
-Zia::ParseRequest::ParseRequest(boost::asio::ip::tcp::socket &socket)
-    : _socket(std::move(socket))
+Zia::ParseRequest::ParseRequest()
 {
 }
 
@@ -23,16 +22,8 @@ Zia::API::Request &Zia::ParseRequest::getRequest()
     return _request;
 }
 
-void Zia::ParseRequest::parsRequest()
+void Zia::ParseRequest::parsRequest(char *buffer)
 {
-    boost::asio::streambuf buffer;
-    boost::system::error_code ec;
-
-    boost::asio::read(_socket, buffer, ec);
-    if (!ec) {
-        std::cerr << ec << std::endl;
-        return;
-    }
     std::string req = _bufferToString(buffer);
     _getMethod(req);
     _getUri(req);
@@ -41,12 +32,9 @@ void Zia::ParseRequest::parsRequest()
     _getBody(req);
 }
 
-std::string Zia::ParseRequest::_bufferToString(const boost::asio::streambuf &buffer)
+std::string Zia::ParseRequest::_bufferToString(char *buffer)
 {
-  using boost::asio::buffers_begin;
-
-  auto bufs = buffer.data();
-  std::string result(buffers_begin(bufs), buffers_begin(bufs) + buffer.size());
+  std::string result(buffer);
   return result;
 }
 

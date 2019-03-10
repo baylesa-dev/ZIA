@@ -25,7 +25,33 @@ Zia::ServerClient::~ServerClient()
 
 void Zia::ServerClient::start()
 {
-    //ParseRequest parse(_socket);
-    // parsRequest lit le socket et ensuite remplie la struct reuqeste fait un getRequest pour l'avoir
-    //parse.parsRequest();
+    // ca seg fault
+    //_requestsHanler->onConnectionStart(_connection, _socket);
+    read();
+}
+
+void Zia::ServerClient::read()
+{
+    auto self(std::enable_shared_from_this<ServerClient>::
+    shared_from_this());
+    _socket.async_read_some(boost::asio::buffer(_buffer, 512),
+        [this, self](boost::system::error_code err, int len)
+    {
+        if (!err) {
+            ParseRequest parse;
+            parse.parsRequest(_buffer);
+            _request = parse.getRequest();
+            // send();
+        }
+        read();
+    });
+}
+
+void Zia::ServerClient::send()
+{
+    auto self(std::enable_shared_from_this<ServerClient>::
+        shared_from_this());
+    boost::asio::async_write(_socket,
+        boost::asio::buffer(_buffer),
+        [this, self](boost::system::error_code err, int len) {});
 }

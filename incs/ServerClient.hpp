@@ -18,7 +18,7 @@
 namespace Zia
 {
 
-class ServerClient
+class ServerClient : public std::enable_shared_from_this<ServerClient>
 {
 public:
     ServerClient(boost::asio::ip::tcp::socket socket,
@@ -27,11 +27,16 @@ public:
                 std::shared_ptr<RequestsHandler> requestsHandler);
     ~ServerClient();
     void start();
+    void read();
+    void send();
+
 protected:
 private:
     API::Connection _connection;
     boost::asio::ip::tcp::socket _socket;
     std::shared_ptr<RequestsHandler> _requestsHanler;
     API::ServerConfig _config;
+	char _buffer[512];
+    API::Request _request;
 };
 } // namespace Zia

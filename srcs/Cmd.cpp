@@ -42,6 +42,7 @@ void Zia::Cmd::_parceCmd(std::string str)
 
 void Zia::Cmd::_stop()
 {
+    std::cout << "Make a connection for Stop" << std::endl;
     if (_cmd.at(0) == "stop") {
         if (_cmd.size() == 2) {
             if (_cmd.at(1) == "-f" || _cmd.at(1) == "--force")
@@ -56,6 +57,7 @@ void Zia::Cmd::_stop()
 
 void Zia::Cmd::_reload()
 {
+    std::cout << "Make a connection for Reload" << std::endl;
     if (_cmd.at(0) == "reload") {
         _zia->stopServer();
         _zia->startServer();
