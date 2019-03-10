@@ -22,8 +22,8 @@ class ServerClient
 {
 public:
     ServerClient(boost::asio::ip::tcp::socket socket,
-                std::string ip,
-                unsigned short port,
+                API::Connection connection,
+                API::ServerConfig config,
                 std::shared_ptr<RequestsHandler> requestsHandler);
     ~ServerClient();
     void start();
