@@ -36,7 +36,7 @@ mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && c
 ```sh
 ./zia [--config "./config.xml"] [--modules "./modules/"]
 ```
-###Config Example
+### Config Example
 
 ```xml
 <server name="Zia" version="1.0.0" port="1234">
