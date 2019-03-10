@@ -14,6 +14,7 @@ conan_basic_setup()
 
 # Modules
 add_subdirectory(modules/PHPModule PHPModule)
+add_subdirectory(modules/DEBUGModule DEBUGModule)
 add_subdirectory(lib/ZiaModuleAPISpec ZiaModuleAPISpec)
 
 # Zia

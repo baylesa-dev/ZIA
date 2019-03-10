@@ -20,11 +20,8 @@ namespace Modules {
 class PHPRequestHandler : public API::RequestHandler
 {
 public:
-    using clock_type = std::chrono::steady_clock;
-
     API::HookResultType onConnectionStart(const API::Connection& conn, tcp::socket& sock) override
     {
-        _start = clock_type::now();
         return API::HookResult::Declined;
     }
 
@@ -42,18 +39,10 @@ public:
 
     API::HookResultType onConnectionEnd(const API::Connection& conn, tcp::socket& sock) override
     {
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(clock_type::now() - _start);
-        std::cout
-            << _req.method << " "
-            << _req.uri << " "
-            << std::to_string(_res.status_code) << " "
-            << std::to_string(elapsed.count()) << "ms"
-            << std::endl;
         return API::HookResult::Declined;
     }
 
 private:
-    clock_type::time_point _start;
     API::Request _req;
     API::Response _res;
 };
