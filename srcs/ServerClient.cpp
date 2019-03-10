@@ -11,11 +11,13 @@
 Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
     API::Connection connection,
     API::ServerConfig config,
+    bool *run,
     std::shared_ptr<RequestsHandler> requestsHandler)
     : _socket(std::move(socket))
     , _connection(connection)
     , _config(config)
 {
+    _run = run;
     _requestsHanler = requestsHandler;
 }
 
@@ -41,9 +43,15 @@ void Zia::ServerClient::read()
             ParseRequest parse;
             parse.parsRequest(_buffer);
             _request = parse.getRequest();
-            // send();
+            std::cout << _request.method << std::endl;
+            _buffer[0] = '2';
+            _buffer[1] = '0';
+            _buffer[2] = '0';
+            _buffer[3] = '\n';
+            send();
         }
-        read();
+        if (*_run == true)
+            read();
     });
 }
 

@@ -24,6 +24,7 @@ public:
     ServerClient(boost::asio::ip::tcp::socket socket,
                 API::Connection connection,
                 API::ServerConfig config,
+                bool *run,
                 std::shared_ptr<RequestsHandler> requestsHandler);
     ~ServerClient();
     void start();
@@ -32,6 +33,7 @@ public:
 
 protected:
 private:
+    bool *_run;
     API::Connection _connection;
     boost::asio::ip::tcp::socket _socket;
     std::shared_ptr<RequestsHandler> _requestsHanler;

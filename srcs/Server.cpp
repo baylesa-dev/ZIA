@@ -100,7 +100,7 @@ void Zia::Server::printStartMessage()
 void Zia::Server::stop()
 {
     _moduleLoader.closeAllModules(_allModule);
-    _socket.close();
+//    _socket.close();
 }
 
 void Zia::Server::start()
@@ -123,6 +123,7 @@ void Zia::Server::accept()
             std::make_shared<ServerClient>(std::move(_socket),
                                            connection,
                                            _config,
+                                           _run,
                                            this->_requestsHanler)->start();
             std::cout << "New Connection !    IP : " << ip << std::endl;
         }
