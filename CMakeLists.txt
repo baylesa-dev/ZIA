@@ -32,6 +32,7 @@ set(SOURCE_FILES
     srcs/RequestsHandler.cpp
     srcs/LoadModules.cpp
     srcs/ParseRequest.cpp
+    srcs/ArgsParser.cpp
 )
 
 add_executable(zia ${SOURCE_FILES})

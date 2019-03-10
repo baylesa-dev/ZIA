@@ -16,6 +16,7 @@
 #include "pugixml.hpp"
 #include "RequestsHandler.hpp"
 #include "LoadModules.hpp"
+#include "ArgsParser.hpp"
 
 #define VERSION "1.0.0"
 #define CONFIG_PATH "config.xml"
@@ -35,7 +36,7 @@ namespace Zia
 class Server
 {
   public:
-    Server(bool *run, unsigned short port);
+    Server(bool *run, unsigned short port, ArgsParser *args);
     ~Server();
     void setConfig();
     void setDefaultConfig();
@@ -57,6 +58,7 @@ class Server
     LoadModules _moduleLoader;
     boost::asio::ip::tcp::socket _socket;
     boost::asio::ip::tcp::acceptor _acceptor;
+    ArgsParser *_args;
 };
 
 } // namespace Zia

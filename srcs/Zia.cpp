@@ -14,7 +14,8 @@
 #include "Server.hpp"
 #include "Zia.hpp"
 
-Zia::Zia::Zia()
+Zia::Zia::Zia(ArgsParser *arg)
+    : _args(arg)
 {
     _run = (bool *)malloc(sizeof(bool));
 }
@@ -40,12 +41,11 @@ void Zia::Zia::runCli()
     }
 }
 
-unsigned short Zia::Zia::getPort()
+unsigned short Zia::Zia::getPort(std::string configPath)
 {
     unsigned short port;
-
     pugi::xml_document config;
-    pugi::xml_parse_result result = config.load_file(CONFIG_PATH);
+    pugi::xml_parse_result result = config.load_file(configPath.c_str());
     port = (unsigned short) config.child("server").attribute("port").as_int();
     if (port == 0)
         port = DEFAULT_PORT;
@@ -55,14 +55,17 @@ unsigned short Zia::Zia::getPort()
 void Zia::Zia::startServer()
 {
     bool *run = _run;
+    ArgsParser *tmp = _args;
 
     if (*_run == true) {
         std::cout << "A server is already running !" << std::endl;
         return;
     }
     *_run = true;
-    _server = new std::thread([run]() {
-        std::shared_ptr<Server> serverPtr = std::shared_ptr<Server>(new Server(run, Zia::Zia::getPort()));
+    _server = new std::thread([run, tmp]() {
+        std::shared_ptr<Server> serverPtr =
+            std::shared_ptr<Server>(new Server(run,
+                Zia::Zia::getPort(tmp->getConfigPath()), tmp));
         serverPtr->start();
     });
 }

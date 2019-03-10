@@ -9,15 +9,17 @@
 #include <string>
 
 #include "Server.hpp"
+#include "ArgsParser.hpp"
 #include "ServerClient.hpp"
 
 boost::asio::io_service io_service;
 
-Zia::Server::Server(bool *run, unsigned short port)
+Zia::Server::Server(bool *run, unsigned short port, ArgsParser *args)
     : _acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port))
     , _socket(io_service)
     , _port(port)
     , _run(run)
+    , _args(args)
 {
     std::shared_ptr<RequestsHandler> _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
     setConfig();
@@ -35,9 +37,10 @@ Zia::Server::~Server()
 void Zia::Server::setConfig()
 {
     pugi::xml_document config;
-    pugi::xml_parse_result result = config.load_file(CONFIG_PATH);
+    pugi::xml_parse_result result = config.load_file(_args->getConfigPath().c_str());
     if (!result) {
-        std::cout << CONFIG_PATH << " : " << result.description() << std::endl;
+        std::cout << _args->getConfigPath() << " : "
+            << result.description() << std::endl;
         setDefaultConfig();
         return;
     }
@@ -54,15 +57,15 @@ void Zia::Server::setDefaultConfig()
 void Zia::Server::setModulesPath()
 {
     pugi::xml_document config;
-    pugi::xml_parse_result result = config.load_file(CONFIG_PATH);
+    pugi::xml_parse_result result = config.load_file(_args->getConfigPath().c_str());
     if (!result) {
         std::cout <<"No modules loaded (unable to find config.xml)"<< std::endl;
         return;
     }
-
-    for (pugi::xml_node mod = config.child("server").child("modules").first_child(); mod; mod = mod.next_sibling())
-    {
-        std::string path(MODULE_PATH);
+    for (pugi::xml_node mod =
+        config.child("server").child("modules").first_child(); mod;
+        mod = mod.next_sibling()) {
+        std::string path(_args->getModulesPath());
         std::string head("zia-");
         std::string name(mod.name());
         std::string ext(".so");

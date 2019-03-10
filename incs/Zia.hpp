@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 #include "Server.hpp"
+#include "ArgsParser.hpp"
 #include "API.hpp"
 
 #define DEFAULT_PORT 4242
@@ -22,10 +23,10 @@ namespace Zia
 class Zia
 {
   public:
-    Zia();
+    Zia(ArgsParser *arg);
     ~Zia();
     void runCli();
-    static unsigned short getPort();
+    static unsigned short getPort(std::string configPath);
     void startServer();
     void stopServer();
     void forceStopServer();
@@ -36,6 +37,7 @@ class Zia
     boost::asio::io_service _io_service;
     std::thread *_server;
     bool *_run;
+    ArgsParser *_args;
 };
 
 } // namespace Zia
