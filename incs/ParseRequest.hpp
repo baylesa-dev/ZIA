@@ -16,16 +16,15 @@ namespace Zia
 class ParseRequest
 {
   public:
-    ParseRequest(boost::asio::ip::tcp::socket& socket);
+    ParseRequest();
     ~ParseRequest();
     API::Request& getRequest();
-    void parsRequest();
+    void parsRequest(char *buffer);
 
   protected:
   private:
     API::Request _request;
-    boost::asio::ip::tcp::socket _socket;
-    std::string _bufferToString(const boost::asio::streambuf &buffer);
+    std::string _bufferToString(char *buffer);
     void _getMethod(std::string &req);
     void _getUri(std::string &req);
     void _getProtocol(std::string &req);
