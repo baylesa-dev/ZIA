@@ -29,3 +29,21 @@ In the project root dir :
 ```sh
 mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && cmake --build .
 ```
+## Usage and config
+
+### Usage
+
+```sh
+./zia [--config "./config.xml"] [--modules "./modules/"]
+```
+###Config Example
+
+```xml
+<server name="Zia" version="1.0.0" port="1234">
+        <modules>
+                <PHPModule></PHPModule>
+                <DEBUGModule></DEBUGModule>
+        </modules>
+</server>
+```
+All module must be name this way : `` zia-YOUR_MODULE_NAME.so``
