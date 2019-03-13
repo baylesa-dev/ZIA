@@ -5,13 +5,15 @@
 ** RequestHandler cpp
 */
 
+#include <iostream>
+
 #include "RequestsHandler.hpp"
 
 Zia::RequestsHandler::RequestsHandler(std::vector<API::Module::pointer> modules)
 {
     for(auto it = modules.begin(); it != modules.end(); it++) {
         _requestsHanler.push_back((*it)->newRequestHandler());
-        }
+    }
 }
 
 Zia::RequestsHandler::~RequestsHandler()

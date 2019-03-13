@@ -28,7 +28,7 @@ Zia::ServerClient::~ServerClient()
 void Zia::ServerClient::start()
 {
     // ca seg fault
-    //_requestsHanler->onConnectionStart(_connection, _socket);
+    _requestsHanler->onConnectionStart(_connection, _socket);
     read();
 }
 

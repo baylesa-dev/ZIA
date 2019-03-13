@@ -21,13 +21,13 @@ Zia::Server::Server(bool *run, unsigned short port, ArgsParser *args)
     , _run(run)
     , _args(args)
 {
-    std::shared_ptr<RequestsHandler> _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
     setConfig();
     setModulesPath();
     printStartMessage();
     LoadModules moduleLoader;
     _moduleLoader = moduleLoader;
     _moduleLoader.loadAllModules(_allModule, _allModulesPath, _config);
+    _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
 }
 
 Zia::Server::~Server()
