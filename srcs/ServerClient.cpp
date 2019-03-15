@@ -24,12 +24,14 @@ Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
 
 Zia::ServerClient::~ServerClient()
 {
+    _requestsHanler->onConnectionEnd(_connection, _socket);
+    _socket.close();
 }
 
 void Zia::ServerClient::start()
 {
-    // ca seg fault
     _requestsHanler->onConnectionStart(_connection, _socket);
+    //_requestsHanler.onConnectionRead()
     read();
 }
 
@@ -44,10 +46,11 @@ void Zia::ServerClient::read()
             ParseRequest parse;
             parse.parsRequest(_buffer);
             _request = parse.getRequest();
-            // En Gros c'est sa
-            // _requestsHanler->onRequest(_connection, _request, _response);
-            // _buffer = AssemblesAnswer().run(_response).c_str();
-            //std::cout << _request.method << std::endl;
+            _requestsHanler->onBeforeRequest(_connection, _request);
+            _requestsHanler->onRequest(_connection, _request, _response);
+            //_requestsHanler->onRequestError(_connection, _statue, _response);
+            _requestsHanler->onResponse(_connection, _response);
+            std::cout << _request.method << std::endl;
             _buffer[0] = '2';
             _buffer[1] = '0';
             _buffer[2] = '0';
@@ -61,6 +64,7 @@ void Zia::ServerClient::read()
 
 void Zia::ServerClient::send()
 {
+    //_requestsHanler->onConnectionWrite();
     auto self(std::enable_shared_from_this<ServerClient>::
         shared_from_this());
     boost::asio::async_write(_socket,
