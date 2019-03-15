@@ -33,15 +33,12 @@ public:
 
     void onActivate(const API::ServerConfig& cfg) override
     {
-        std::cout << "DEBUG onActivate() !" << std::endl;
     }
     void onDeactivate()
     {
-        std::cout << "DEBUG onDeactivate() !" << std::endl;
     }
     void onConfigChange(const API::ServerConfig& cfg) override
     {
-        std::cout << "DEBUG onConfigChange() !" << std::endl;
     }
 
 private:

@@ -7,6 +7,7 @@
 
 #include "ParseRequest.hpp"
 #include "ServerClient.hpp"
+#include "AssemblesAnswer.hpp"
 
 Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
     API::Connection connection,
@@ -43,7 +44,10 @@ void Zia::ServerClient::read()
             ParseRequest parse;
             parse.parsRequest(_buffer);
             _request = parse.getRequest();
-            std::cout << _request.method << std::endl;
+            // En Gros c'est sa
+            // _requestsHanler->onRequest(_connection, _request, _response);
+            // _buffer = AssemblesAnswer().run(_response).c_str();
+            //std::cout << _request.method << std::endl;
             _buffer[0] = '2';
             _buffer[1] = '0';
             _buffer[2] = '0';
