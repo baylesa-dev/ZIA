@@ -7,6 +7,7 @@
 
 #include "ParseRequest.hpp"
 #include "ServerClient.hpp"
+#include "AssemblesAnswer.hpp"
 
 Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
     API::Connection connection,
