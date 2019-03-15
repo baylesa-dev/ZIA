@@ -32,7 +32,6 @@ class StaticRequestHandler : public API::RequestHandler
     API::HookResultType onRequest(const API::Connection &conn, const API::Request &req, API::Response &res) override
     {
         _path = _basePath + req.uri;
-        std::cout << "path = " << _path << std::endl;
         if (!access(_path.c_str(), R_OK))
         {
             res.protocol = "HTTP/1.1";
