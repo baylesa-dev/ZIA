@@ -5,15 +5,13 @@
 ** RequestHandler cpp
 */
 
-#include <iostream>
-
 #include "RequestsHandler.hpp"
 
 Zia::RequestsHandler::RequestsHandler(std::vector<API::Module::pointer> modules)
 {
     for(auto it = modules.begin(); it != modules.end(); it++) {
         _requestsHanler.push_back((*it)->newRequestHandler());
-    }
+        }
 }
 
 Zia::RequestsHandler::~RequestsHandler()
@@ -25,7 +23,8 @@ void Zia::RequestsHandler::onConnectionStart(const API::Connection& conn,
     boost::asio::ip::tcp::socket& sock)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onConnectionStart(conn, sock);
+        if ((*it)->onConnectionStart(conn, sock))
+            break;
     }
 }
 
@@ -33,7 +32,8 @@ void Zia::RequestsHandler::onConnectionEnd(const API::Connection& conn,
     boost::asio::ip::tcp::socket& sock)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onConnectionEnd(conn, sock);
+        if ((*it)->onConnectionEnd(conn, sock))
+            break;
     }
 }
 
@@ -43,7 +43,8 @@ void Zia::RequestsHandler::onConnectionRead(const API::Connection& conn,
     size_t& read)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onConnectionRead(conn, sock, buf, read);
+        if ((*it)->onConnectionRead(conn, sock, buf, read))
+            break;
     }
 }
 
@@ -53,34 +54,39 @@ void Zia::RequestsHandler::onConnectionWrite(const API::Connection& conn,
     size_t& written)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onConnectionWrite(conn, sock, buf, written);
+        if ((*it)->onConnectionWrite(conn, sock, buf, written))
+            break;
     }
 }
 
 void Zia::RequestsHandler::onBeforeRequest(const API::Connection& conn, API::Request& req)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onBeforeRequest(conn, req);
+        if ((*it)->onBeforeRequest(conn, req))
+            break;
     }
 }
 
 void Zia::RequestsHandler::onRequest(const API::Connection& conn, const API::Request& req, API::Response& res)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onRequest(conn, req, res);
+        if ((*it)->onRequest(conn, req, res))
+            break;
     }
 }
 
 void Zia::RequestsHandler::onRequestError(const API::Connection& conn, int status, API::Response& res)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onRequestError(conn, status, res);
+        if ((*it)->onRequestError(conn, status, res))
+            break;
     }
 }
 
 void Zia::RequestsHandler::onResponse(const API::Connection& conn, API::Response& res)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
-        (*it)->onResponse(conn, res);
+        if ((*it)->onResponse(conn, res))
+            break;
     }
 }

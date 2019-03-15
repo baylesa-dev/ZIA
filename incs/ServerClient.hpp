@@ -40,5 +40,6 @@ private:
     API::ServerConfig _config;
 	char _buffer[512];
     API::Request _request;
+    API::Response _response;
 };
 } // namespace Zia
