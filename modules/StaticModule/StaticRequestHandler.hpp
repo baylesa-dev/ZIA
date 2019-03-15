@@ -10,6 +10,8 @@
 #include <iostream>
 #include <chrono>
 #include <boost/asio.hpp>
+#include <fstream>
+
 #include "Zia/API.hpp"
 
 using boost::asio::ip::tcp;
@@ -22,49 +24,37 @@ namespace Modules
 class StaticRequestHandler : public API::RequestHandler
 {
   public:
-    API::HookResultType onConnectionStart(const API::Connection &conn, tcp::socket &sock) override
+    StaticRequestHandler(std::string basePath = "/usr/www")
+        : _basePath(basePath)
     {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onConnectionEnd(const API::Connection &conn, tcp::socket &sock) override
-    {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onConnectionRead(const API::Connection &conn, tcp::socket &sock, std::vector<char> &buf, size_t &read) override
-    {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onConnectionWrite(const API::Connection &conn, tcp::socket &sock, const std::vector<char> &buf, size_t &written) override
-    {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onBeforeRequest(const API::Connection &conn, API::Request &req) override
-    {
-        return API::HookResult::Declined;
     }
 
     API::HookResultType onRequest(const API::Connection &conn, const API::Request &req, API::Response &res) override
     {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onRequestError(const API::Connection &conn, int status, API::Response &res) override
-    {
-        return API::HookResult::Declined;
-    }
-
-    API::HookResultType onResponse(const API::Connection &conn, API::Response &res) override
-    {
+        _path = _basePath + req.uri;
+        std::cout << "path = " << _path << std::endl;
+        if (!access(_path.c_str(), R_OK))
+        {
+            res.protocol = "HTTP/1.1";
+            res.status_code = 200;
+            res.status_message = "OK";
+            std::ifstream inFile;
+            inFile.open(_path);
+            std::stringstream strStream;
+            strStream << inFile.rdbuf();
+            std::string str = strStream.str();
+            for (auto c: str)
+                res.body.push_back(c);
+            return API::HookResult::Ok;
+        }
         return API::HookResult::Declined;
     }
 
   private:
     API::Request _req;
     API::Response _res;
+    std::string _basePath;
+    std::string _path;
 };
 
 } // namespace Modules
