@@ -25,7 +25,6 @@ Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
 Zia::ServerClient::~ServerClient()
 {
     _requestsHanler->onConnectionEnd(_connection, _socket);
-    _socket.close();
 }
 
 void Zia::ServerClient::start()
@@ -45,8 +44,6 @@ void Zia::ServerClient::read()
         if (!err)
             onRead(len);
         _bufferRead.clear();
-        if (*_run == true)
-            read();
     });
 }
 
