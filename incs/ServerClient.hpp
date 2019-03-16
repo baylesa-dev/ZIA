@@ -29,7 +29,7 @@ class ServerClient : public std::enable_shared_from_this<ServerClient>
     ~ServerClient();
     void start();
     void read();
-    void onRead();
+    void onRead(int len);
     void send();
 
   protected:
@@ -41,7 +41,9 @@ class ServerClient : public std::enable_shared_from_this<ServerClient>
     API::ServerConfig _config;
     char _buffer[512];
     std::vector<char> _bufferRead;
+    size_t _read;
     std::vector<char> _bufferWrite;
+    size_t _write;
     API::Request _request;
     API::Response _response;
 };
