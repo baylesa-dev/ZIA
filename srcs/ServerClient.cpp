@@ -8,7 +8,6 @@
 #include "ParseRequest.hpp"
 #include "ServerClient.hpp"
 #include "AssemblesAnswer.hpp"
-#include "string.h"
 
 Zia::ServerClient::ServerClient(boost::asio::ip::tcp::socket socket,
     API::Connection connection,
@@ -44,19 +43,31 @@ void Zia::ServerClient::read()
         [this, self](boost::system::error_code err, int len)
     {
         if (!err) {
-            ParseRequest parse;
-            parse.parsRequest(_buffer);
-            _request = parse.getRequest();
-            _requestsHanler->onBeforeRequest(_connection, _request);
-            _requestsHanler->onRequest(_connection, _request, _response);
-            //_requestsHanler->onRequestError(_connection, _statue, _response);
-            _requestsHanler->onResponse(_connection, _response);
-            strcpy(_buffer, AssemblesAnswer().run(_response).c_str());
-            send();
+            std::vector<char> tmp(_buffer, _buffer + len);
+            _bufferRead = tmp;
+            std::cout << _bufferRead.size() << std::endl;
+            onRead();
+            _bufferRead.clear();
         }
         if (*_run == true)
             read();
     });
+}
+
+void Zia::ServerClient::onRead()
+{
+    ParseRequest parse;
+    parse.parsRequest(_bufferRead);
+    _request = parse.getRequest();
+    _requestsHanler->onBeforeRequest(_connection, _request);
+    _requestsHanler->onRequest(_connection, _request, _response);
+    if (_response.status_code >= 400)
+        _requestsHanler->onRequestError(_connection, _response.status_code, _response);
+    _requestsHanler->onResponse(_connection, _response);
+    std::string tmp = AssemblesAnswer().run(_response).c_str();
+    //_bufferWrite.clean();
+    _bufferWrite = std::vector<char>(tmp.begin(), tmp.end());
+    send();
 }
 
 void Zia::ServerClient::send()
@@ -65,6 +76,6 @@ void Zia::ServerClient::send()
     auto self(std::enable_shared_from_this<ServerClient>::
         shared_from_this());
     boost::asio::async_write(_socket,
-        boost::asio::buffer(_buffer),
+        boost::asio::buffer(_bufferWrite),
         [this, self](boost::system::error_code err, int len) {});
 }
