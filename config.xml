@@ -2,5 +2,7 @@
         <modules>
                 <StaticModule>
                 </StaticModule>
+                <DEBUGModule>
+                </DEBUGModule>
         </modules>
 </server>
