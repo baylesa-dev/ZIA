@@ -8,6 +8,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include "API.hpp"
 
 namespace Zia
@@ -19,12 +20,12 @@ class ParseRequest
     ParseRequest();
     ~ParseRequest();
     API::Request& getRequest();
-    void parsRequest(char *buffer);
+    void parsRequest(std::vector<char> &buffer);
 
   protected:
   private:
     API::Request _request;
-    std::string _bufferToString(char *buffer);
+    std::string _bufferToString(std::vector<char> &buffer);
     void _getMethod(std::string &req);
     void _getUri(std::string &req);
     void _getProtocol(std::string &req);
