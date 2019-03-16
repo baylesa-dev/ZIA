@@ -14,6 +14,9 @@
 
 #include "Zia/API.hpp"
 
+#define NOT_FOUND "<!DOCTYPE html><html><head><meta charset=\"utf-8\">\
+    <title>Error 404</title></head><body><p>404 Not Found</p></body></html>\0"
+
 using boost::asio::ip::tcp;
 
 namespace Zia
@@ -46,6 +49,12 @@ class StaticRequestHandler : public API::RequestHandler
                 res.body.push_back(c);
             return API::HookResult::Ok;
         }
+        res.protocol = "HTTP/1.1";
+        res.status_code = 404;
+        res.status_message = "Not Found";
+        std::string str(NOT_FOUND);
+        for (auto c: str)
+            res.body.push_back(c);
         return API::HookResult::Declined;
     }
 
