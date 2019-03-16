@@ -22,7 +22,7 @@ Zia::API::Request &Zia::ParseRequest::getRequest()
     return _request;
 }
 
-void Zia::ParseRequest::parsRequest(char *buffer)
+void Zia::ParseRequest::parsRequest(std::vector<char> &buffer)
 {
     std::string req = _bufferToString(buffer);
     _getMethod(req);
@@ -32,9 +32,9 @@ void Zia::ParseRequest::parsRequest(char *buffer)
     _getBody(req);
 }
 
-std::string Zia::ParseRequest::_bufferToString(char *buffer)
+std::string Zia::ParseRequest::_bufferToString(std::vector<char> &buffer)
 {
-  std::string result(buffer);
+  std::string result(buffer.data(), buffer.size());
   return result;
 }
 
@@ -61,7 +61,6 @@ void Zia::ParseRequest::_getHeaders(std::string &req)
     std::string tmp1;
     std::string tmp2;
 
-    std::cout << "getHeader" << std::endl;
     while (req.find('\r') != 0) {
         tmp1 = req.substr(0, req.find(": "));
         req.erase(0, req.find(": ") + 2);
@@ -70,13 +69,11 @@ void Zia::ParseRequest::_getHeaders(std::string &req)
         std::pair<std::string,std::string> obj(tmp1, tmp2);
         _request.headers.insert(obj);
     }
-    std::cout << "getHeader2" << std::endl;
     req.erase(0, req.find('\r') + 2);
 }
 
 void Zia::ParseRequest::_getBody(std::string &req)
 {
-    std::cout << "getBody" << std::endl;
     for (int i = 0; i != req.size(); i++) {
         _request.body.push_back(req.at(i));
     }
