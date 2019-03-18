@@ -42,6 +42,7 @@ public:
     }
     void onConfigChange(const API::ServerConfig& cfg) override
     {
+        createContextSSL(cfg);
         std::cout << "SSL onConfigChange() !" << std::endl;
     }
 
