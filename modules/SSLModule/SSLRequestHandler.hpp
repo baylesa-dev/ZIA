@@ -25,6 +25,9 @@ namespace Modules
 class SSLRequestHandler : public API::RequestHandler
 {
   public:
+    SSLRequestHandler(std::shared_ptr<boost::asio::ssl::context> const &context) : RequestHandler(), _context(context)
+    {}
+
     API::HookResultType onConnectionStart(const API::Connection &conn, tcp::socket &sock) override
     {
         _socket = std::make_unique<tls_socket>(sock, *_context);

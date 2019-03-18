@@ -29,7 +29,7 @@ public:
 
     API::RequestHandler::pointer newRequestHandler() override
     {
-        return std::make_shared<SSLRequestHandler>();
+        return std::make_shared<SSLRequestHandler>(_sslContext);
     }
 
     void onActivate(const API::ServerConfig& cfg) override
