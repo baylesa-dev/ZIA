@@ -2,6 +2,5 @@
         <modules>
                 <StaticModule></StaticModule>
                 <DEBUGModule></DEBUGModule>
-                <SSLModule></SSLModule>
         </modules>
 </server>
