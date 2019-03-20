@@ -47,11 +47,11 @@ public:
     }
 
 private:
-    std::string _name = "SSL";
+    std::string _name = "SSLModule";
     std::shared_ptr<boost::asio::ssl::context> _sslContext;
     inline static const std::string certificate = "tls_certificate_path";
     inline static const std::string privateKey = "tls_private_key_path";
-    
+
 
     std::string loadFile(std::string const &path) const {
         std::ifstream ifs(path);
@@ -83,7 +83,7 @@ private:
                 boost::asio::buffer(pvt_key.data(), pvt_key.size()),
                 boost::asio::ssl::context::file_format::pem);
     }
-    
+
 };
 
 }
