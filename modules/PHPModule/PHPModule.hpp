@@ -41,7 +41,7 @@ public:
     }
 
 private:
-    std::string _name = "PHP";
+    std::string _name = "PHPModule";
 };
 
 }
