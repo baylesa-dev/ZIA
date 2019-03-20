@@ -69,13 +69,13 @@ void Zia::RequestsHandler::onBeforeRequest(const API::Connection& conn, API::Req
 
 void Zia::RequestsHandler::onRequest(const API::Connection& conn, const API::Request& req, API::Response& res)
 {
+    res.protocol = "HTTP/1.1";
+    res.status_code = 204;
+    res.status_message = "No Content";
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
         if ((*it)->onRequest(conn, req, res))
             return ;
     }
-    res.protocol = "HTTP/1.1";
-    res.status_code = 204;
-    res.status_message = "No Content";
 }
 
 void Zia::RequestsHandler::onRequestError(const API::Connection& conn, int status, API::Response& res)

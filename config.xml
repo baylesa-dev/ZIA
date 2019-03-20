@@ -1,10 +1,6 @@
 <server name="Zia" version="1.0.0" port="1234">
         <modules>
-                <StaticModule
-                    Testeee="qfwfqw"
-                    Toto="wfwefew"/>
-                <DEBUGModule
-                    Test="oui"
-                    ouiss="ewfwef"/>
+                <StaticModule></StaticModule>
+                <DEBUGModule></DEBUGModule>
         </modules>
 </server>

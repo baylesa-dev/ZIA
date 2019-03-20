@@ -25,7 +25,7 @@ class DEBUGRequestHandler : public API::RequestHandler
     API::HookResultType onConnectionStart(const API::Connection &conn, tcp::socket &sock) override
     {
         std::cout << "DEBUG onConnectionStart() !" << std::endl;
-        std::cout << "conn.addr = " << conn.addr << "\nconn.port = " << conn.port <<  std::endl;
+        std::cout << "conn.addr = " << conn.addr << "\nconn.port = " << conn.port << "\n" << std::endl;
         return API::HookResult::Declined;
     }
 
@@ -40,7 +40,7 @@ class DEBUGRequestHandler : public API::RequestHandler
     {
         std::cout << "DEBUG onConnectionRead() !" << std::endl;
         std::cout << "conn.addr = " << conn.addr << "\nconn.port = " << conn.port <<  std::endl;
-        std::cout << "buf = ";
+        std::cout << "buf";
         for (auto c: buf)
             std::cout << c;
         std::cout << "\nread = " << read <<  std::endl;
@@ -51,7 +51,7 @@ class DEBUGRequestHandler : public API::RequestHandler
     {
         std::cout << "DEBUG onConnectionWrite() !" << std::endl;
         std::cout << "conn.addr = " << conn.addr << "\nconn.port = " << conn.port <<  std::endl;
-        std::cout << "buf = " << std::endl;
+        std::cout << "buf" << std::endl;
         for (auto c: buf)
             std::cout << c;
         std::cout << "\nwritten = " << written <<  std::endl;

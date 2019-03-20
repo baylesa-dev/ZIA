@@ -10,7 +10,7 @@
 #include "ArgsParser.hpp"
 
 Zia::ArgsParser::ArgsParser(int argc, char **argv)
-    : _modulesPath(std::string(".")), _configPath(std::string("./config.xml"))
+    : _modulesPath(std::string("modules/")), _configPath(std::string("./config.xml"))
 {
     for (int i = 0; i != argc; i++)
        _argv.push_back(std::string(argv[i]));

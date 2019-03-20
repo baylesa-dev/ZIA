@@ -100,14 +100,16 @@ void Zia::Server::printStartMessage()
 void Zia::Server::stop()
 {
     _moduleLoader.closeAllModules(_allModule);
-//    _socket.close();
+    _socket.close();
 }
 
 void Zia::Server::start()
 {
     accept();
-    while(*_run == true)
+    while(*_run == true) {
+        accept();
         io_service.run_one();
+    }
     stop();
 }
 
@@ -117,6 +119,7 @@ void Zia::Server::accept()
         [this](boost::system::error_code err) {
         if (!err) {
             std::string ip(_socket.remote_endpoint().address().to_string());
+            std::cout << "New Connection !    IP : " << ip << std::endl;
             API::Connection connection;
             connection.addr = ip;
             connection.port = _port;
@@ -125,8 +128,6 @@ void Zia::Server::accept()
                                            _config,
                                            _run,
                                            this->_requestsHanler)->start();
-            std::cout << "New Connection !    IP : " << ip << std::endl;
         }
-        accept();
     });
 }
