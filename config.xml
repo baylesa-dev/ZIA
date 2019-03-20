@@ -1,8 +1,10 @@
 <server name="Zia" version="1.0.0" port="1234">
         <modules>
-                <StaticModule>
-                </StaticModule>
-                <DEBUGModule>
-                </DEBUGModule>
+                <StaticModule
+                    Testeee="qfwfqw"
+                    Toto="wfwefew"/>
+                <DEBUGModule
+                    Test="oui"
+                    ouiss="ewfwef"/>
         </modules>
 </server>

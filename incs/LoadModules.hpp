@@ -10,6 +10,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "pugixml.hpp"
 
 #include "API.hpp"
 
@@ -24,11 +25,13 @@ class LoadModules
     bool loadAllModules(
         std::vector<API::Module::pointer> &allModules,
         std::vector<std::string> allModulesPath,
-        const API::ServerConfig &cfg);
+        std::string configPath,
+        API::ServerConfig &cfg);
     void closeAllModules(std::vector<API::Module::pointer> &allModules);
 
   protected:
   private:
+    API::ServerConfig &_getModuleConfig(std::string modName, API::ServerConfig &cfg, std::string configPath);
     std::vector<void *> _loadmodule;
 };
 
