@@ -21,8 +21,8 @@ namespace Zia
         ~RequestsHandler();
         void onConnectionStart(const API::Connection& conn, boost::asio::ip::tcp::socket& sock);
         void onConnectionEnd(const API::Connection& conn, boost::asio::ip::tcp::socket& sock);
-        void onConnectionRead(const API::Connection& conn, boost::asio::ip::tcp::socket& sock, std::vector<char>& buf, size_t& read);
-        void onConnectionWrite(const API::Connection& conn, boost::asio::ip::tcp::socket& sock, const std::vector<char>& buf, size_t& written);
+        bool onConnectionRead(const API::Connection& conn, boost::asio::ip::tcp::socket& sock, std::vector<char>& buf, size_t& read);
+        bool onConnectionWrite(const API::Connection& conn, boost::asio::ip::tcp::socket& sock, const std::vector<char>& buf, size_t& written);
         void onBeforeRequest(const API::Connection& conn, API::Request& req);
         void onRequest(const API::Connection& conn, const API::Request& req, API::Response& res);
         void onRequestError(const API::Connection& conn, int status, API::Response& res);
