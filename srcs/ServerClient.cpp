@@ -30,8 +30,10 @@ Zia::ServerClient::~ServerClient()
 void Zia::ServerClient::start()
 {
     _requestsHanler->onConnectionStart(_connection, _socket);
-    _requestsHanler->onConnectionRead(_connection, _socket, _bufferRead, _read);
-    read();
+    if (_requestsHanler->onConnectionRead(_connection, _socket, _bufferRead, _read))
+        onRead(_read);
+    else
+        read();
 }
 
 void Zia::ServerClient::read()
@@ -67,10 +69,11 @@ void Zia::ServerClient::onRead(int len)
 
 void Zia::ServerClient::send()
 {
-    _requestsHanler->onConnectionWrite(_connection, _socket, _bufferWrite, _write);
     auto self(std::enable_shared_from_this<ServerClient>::
         shared_from_this());
-    boost::asio::async_write(_socket,
-        boost::asio::buffer(_bufferWrite),
-        [this, self](boost::system::error_code err, int len) {});
+    if (!_requestsHanler->onConnectionWrite(_connection, _socket, _bufferWrite, _write)) {
+        boost::asio::async_write(_socket,
+            boost::asio::buffer(_bufferWrite),
+            [this, self](boost::system::error_code err, int len) {});
+    }
 }

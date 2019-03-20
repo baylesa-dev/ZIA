@@ -37,26 +37,28 @@ void Zia::RequestsHandler::onConnectionEnd(const API::Connection& conn,
     }
 }
 
-void Zia::RequestsHandler::onConnectionRead(const API::Connection& conn,
+bool Zia::RequestsHandler::onConnectionRead(const API::Connection& conn,
     boost::asio::ip::tcp::socket& sock,
     std::vector<char>& buf,
     size_t& read)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
         if ((*it)->onConnectionRead(conn, sock, buf, read))
-            break;
+            return (true);
     }
+    return (false);
 }
 
-void Zia::RequestsHandler::onConnectionWrite(const API::Connection& conn,
+bool Zia::RequestsHandler::onConnectionWrite(const API::Connection& conn,
     boost::asio::ip::tcp::socket& sock,
     const std::vector<char>& buf,
     size_t& written)
 {
     for(auto it = _requestsHanler.begin(); it != _requestsHanler.end(); it++) {
         if ((*it)->onConnectionWrite(conn, sock, buf, written))
-            break;
+            return (true);
     }
+    return (false);
 }
 
 void Zia::RequestsHandler::onBeforeRequest(const API::Connection& conn, API::Request& req)
