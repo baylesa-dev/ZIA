@@ -1,6 +1,9 @@
 <server name="Zia" version="1.0.0" port="1234">
         <modules>
-                <StaticModule></StaticModule>
-                <DEBUGModule></DEBUGModule>
+                <SSLModule
+                    certificate="/modules/SSLModule/dist/cert.crt"
+                    privateKey="/modules/SSLModule/dist/private.key"/>
+                <DEBUGModule/>
+                <StaticModule/>
         </modules>
 </server>
