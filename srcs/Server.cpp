@@ -26,7 +26,7 @@ Zia::Server::Server(bool *run, unsigned short port, ArgsParser *args)
     printStartMessage();
     LoadModules moduleLoader;
     _moduleLoader = moduleLoader;
-    _moduleLoader.loadAllModules(_allModule, _allModulesPath, _config);
+    _moduleLoader.loadAllModules(_allModule, _allModulesPath, _args->getConfigPath(), _config);
     _requestsHanler = std::shared_ptr<RequestsHandler>(new RequestsHandler(_allModule));
 }
 

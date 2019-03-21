@@ -42,7 +42,7 @@ public:
     }
 
 private:
-    std::string _name = "Static";
+    std::string _name = "StaticModule";
 };
 
 }

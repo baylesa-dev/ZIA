@@ -45,7 +45,7 @@ public:
     }
 
 private:
-    std::string _name = "DEBUG";
+    std::string _name = "DEBUGModule";
 };
 
 }
