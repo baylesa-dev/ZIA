@@ -35,6 +35,15 @@ cd CPP_zia_2018
 git submodule update --init --recursive
 ```
 
+## Conan repositories
+
+```bash
+conan remote add conan https://api.bintray.com/conan/conan/conan-center
+conan remote add epitech https://api.bintray.com/conan/epitech/public-conan
+conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+```
+
+
 ## Build
 
 ```bash

@@ -9,6 +9,7 @@
 - 🔐 SSL Support
 - 🐘 PHP Support
 - 🤖 Written in C++
+- 👷🏻 Debug mode
 
 <div class="buttons">
   <a href="https://github.com/" target="_blank"><span>GitHub</span></a>
