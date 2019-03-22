@@ -27,10 +27,14 @@ This is the list of modules delivered with Zia.
 
 ### SSL
 
-This module is a basic SSL module. It allows encrypted communication, using SSL from [Boost Asio](https://www.boost.org/)
+This module is a basic SSL module. It allows encrypted communication, using SSL from [Boost Asio](https://www.boost.org/).
+
+> By default, Zia provide a certificat and a private key for symmetric cryptography. You can use them to test Zia, but for your security, you have to replace theses files. Learn how to generate a self-signed certificat using OpenSSL [here](https://www.ibm.com/support/knowledgecenter/en/SSWHYP_4.0.0/com.ibm.apimgmt.cmc.doc/task_apionprem_gernerate_self_signed_openSSL.html)
 
 
-### PHP
+### Static
+
+This module allows to serve static files, and interpret HTML.
 
 ### Debug
 
