@@ -12,7 +12,7 @@
 - 👷🏻 Debug mode
 
 <div class="buttons">
-  <a href="https://github.com/" target="_blank"><span>GitHub</span></a>
+  <a href="https://github.com/baylesa-dev/Zia" target="_blank"><span>GitHub</span></a>
   <a href="#/README"><span>Get Started</span></a>
 </div>
 

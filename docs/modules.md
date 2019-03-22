@@ -38,6 +38,8 @@ This module allows to serve static files, and interpret HTML.
 
 ### Debug
 
+Debug module logs requests informations on standard output to help you debug your application.
+
 ## Create your own module
 
 You can create your own module to implement a new HTTP process.
