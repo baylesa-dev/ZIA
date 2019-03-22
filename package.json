@@ -1,0 +1,13 @@
+{
+  "name": "CPP_zia_2018",
+  "version": "1.0.0",
+  "description": "Communication is key",
+  "main": "index.js",
+  "repository": "git@gitlab.si0ls.fr:epitech/CPP_zia_2018.git",
+  "author": "Adrien 🍺 <adrien.bayles@epitech.eu>",
+  "license": "MIT",
+  "devDependencies": {
+    "docsify-cli": "^4.3.0",
+    "gh-pages": "^2.0.1"
+  }
+}

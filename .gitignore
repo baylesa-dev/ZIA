@@ -174,3 +174,5 @@ tags
 .history
 
 # End of https://www.gitignore.io/api/c,vim,c++,cmake,emacs,visualstudiocode
+
+/node_modules
