@@ -34,7 +34,7 @@ This module is a basic SSL module. It allows encrypted communication, using SSL 
 
 ### Static
 
-This module allows to serve static files, and interpret HTML.
+This module allows to serve static files (images, HTML, text, ...).
 
 ### Debug
 
@@ -44,8 +44,102 @@ Debug module logs requests informations on standard output to help you debug you
 
 You can create your own module to implement a new HTTP process.
 
-```c++
-class MyModule : public API::Module {
-    /* methods */
-};
+#### Architecture
+
+You have to create a directory containing few files :
+
+    .
+    +-- MyModule
+    |   +-- CMakeLists.txt
+    |   +-- factory.cpp
+    |   +-- MyModule.hpp
+    |   +-- MyRequestHandler.hpp
+
+
+*CMakelists.txt*
+```cmake
+add_library(MyModule MODULE
+    factory.cpp
+)
+set_target_properties(MyModule PROPERTIES PREFIX "zia-")
+target_link_libraries(MyModule
+    ${CONAN_LIBS_BOOST}
+    ZiaModuleAPISpec
+)
+```
+
+*factory.cpp*
+```cpp
+#include <iostream>
+#include <Zia/API.hpp>
+
+#include "Module.hpp"
+
+ZIA_API_EXPORT Zia::API::Module::pointer factory() {
+    return new Zia::Modules::Log::Module;
+}
+
+ZIA_API_EXPORT void recycler(Zia::API::Module::pointer instance) {
+    delete instance;
+}
+```
+
+*MyModule.hpp*
+```cpp
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <Zia/API.hpp>
+
+#include "RequestHandler.hpp"
+
+namespace Zia {
+    namespace Modules {
+        class Module : public API::Module {
+            public:
+            const std::string& getName() const override {
+                return _name;
+            }
+            API::RequestHandler::pointer newRequestHandler() override {
+                return std::make_shared<RequestHandler>();
+            }
+            private:
+            std::string _name = "log";
+        };
+    }
+}
+```
+*RequestHandler.hpp*
+```cpp
+#pragma once
+
+#include <iostream>
+#include <chrono>
+#include <boost/asio.hpp>
+#include <Zia/API.hpp>
+
+using boost::asio::ip::tcp;
+
+namespace Zia {
+    namespace Modules {
+        class RequestHandler : public API::RequestHandler {
+            public:
+            API::HookResultType onConnectionStart(const API::Connection& conn tcp::socket& sock) override;
+            API::HookResultType onRequest(const API::Connection& conn, const API::Request& req, API::Response& res) override;
+            API::HookResultType onResponse(const API::Connection& conn,API::Response& res) override;
+            API::HookResultType onConnectionEnd(const API::Connection& conn,tcp::socket& sock) override;
+        };
+    }
+}
+
+```
+
+> If you want to compile your module with Zia, remind to add it in root CMakeList.txt. **Check out below**
+
+```cmake
+/** **/
+# Modules
+add_subdirectory(modules/MyModule MyModule)
+/** **/
 ```
