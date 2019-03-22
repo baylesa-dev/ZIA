@@ -6,6 +6,8 @@ Configuration file define which module Zia have to load. You can change and relo
 
 Configurations files are written in *__.xml__*, so they are more reader-friendly.
 
+> Modules are load in the same order as their declaration.
+
 ## Default values
 
 - **name**: *Default Zia*
@@ -28,6 +30,9 @@ You should pass your configuration file as below :
 <server name="Zia" version="1.0.0" port="1234">
     <modules>
         <PHPModule></PHPModule>
+        <SSLModule
+            certificate="/modules/SSLModule/dist/cert.crt"
+            privateKey="/modules/SSLModule/dist/private.key"/>
         <DEBUGModule></DEBUGModule>
     </modules>
 </server>

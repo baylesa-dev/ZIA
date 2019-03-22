@@ -1,5 +1,5 @@
 <p align="center">
-        <img alt="Zia" height="200px" src="docs/assets/logo-Zia.png">
+        <img alt="Zia" height="200px" src="https://github.com/baylesa-dev/ZIA/blob/master/docs/assets/logo-Zia.png?raw=true">
 </p>
 <h2 align="center">Communication is key</h2>
 
@@ -17,7 +17,7 @@ Zia project is a typical HTTP server like NGINX or Apache. Zia is modulable, to 
 
 ## Getting Started
 
-Check out the [Build and Start](build-start) documentation to get started.
+Check out the [Build and Start](https://github.com/baylesa-dev/ZIA/blob/master/docs/build-start.md) documentation to get started.
 
 ## Usage
 
