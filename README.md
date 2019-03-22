@@ -1,5 +1,5 @@
 <p align="center">
-        <img alt="Zia" height="200px" src="assets/logo-Zia.png">
+        <img alt="Zia" height="200px" src="docs/assets/logo-Zia.png">
 </p>
 <h2 align="center">Communication is key</h2>
 
