@@ -1,50 +1,41 @@
-# CPP_zia_2018
+<p align="center">
+        <img alt="Zia" height="200px" src="assets/logo-Zia.png">
+</p>
+<h2 align="center">Communication is key</h2>
 
-Communication is key
+<h3 align="center">Epitech-made HTTP intermodulable server</h3>
 
-## Install & Build
+Zia project is a typical HTTP server like NGINX or Apache. Zia is modulable, to add features, like SSL or PHP support. Developers can add their own modules. Zia is written in C++.
 
-### Conan
+> Zia use [demaisj](https://github.com/demaisj) API. You can find it [here](https://github.com/demaisj/ZiaModuleAPISpec)
 
-Follow instructions on [https://docs.conan.io/en/latest/installation.html](https://docs.conan.io/en/latest/installation.html)
+## Features
 
-### Add conan repositories
+- 🔐 SSL Support
+- 🐘 PHP Support
+- 🚨 Debug Module
 
-```sh
-conan remote add conan https://api.bintray.com/conan/conan/conan-center
-conan remote add epitech https://api.bintray.com/conan/epitech/public-conan
-conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
-```
+## Getting Started
 
-### Pull submodules
+Check out the [Build and Start](build-start) documentation to get started.
 
-```sh
-git submodule update --init --recursive
-```
+## Usage
 
-### Build
-
-In the project root dir :
-
-```sh
-mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && cmake --build .
-```
-## Usage and config
-
-### Usage
-
-```sh
+```bash
 ./zia [--config "./config.xml"] [--modules "./modules/"]
 ```
-All modules in modules path must be name this way : `` zia-YOUR_MODULE_NAME.so``
 
-### Config Example
+## Configuration Example
 
-```xml
-<server name="Zia" version="1.0.0" port="1234">
-        <modules>
-                <PHPModule></PHPModule>
-                <DEBUGModule></DEBUGModule>
-        </modules>
-</server>
-```
+Check out the [Configuration](./docs/configuration.md) documentation to learn how to use it.
+
+## Credits
+
+*In alphabetical order:*
+
+- [Adam Goncalves]() - SSL Module creator
+- [Adrien Bayles](https://github.com/baylesa-dev) - Documentalist
+- [Eléonore Goumy]() - SSL Module creator
+- [Fernand Matignon]() - Main Maintainer
+- [Louis Schneider](https://github.com/si0ls) - Merger
+- [Marius Michelot](https://github.com/mmichelot) - Second main maintainer
