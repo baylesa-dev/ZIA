@@ -34,16 +34,14 @@ public:
 
     void onActivate(const API::ServerConfig& cfg) override
     {
-        std::cout << "SSL onActivate() !" << std::endl;
+        createContextSSL(cfg);
     }
     void onDeactivate()
     {
-        std::cout << "SSL onDeactivate() !" << std::endl;
     }
     void onConfigChange(const API::ServerConfig& cfg) override
     {
         createContextSSL(cfg);
-        std::cout << "SSL onConfigChange() !" << std::endl;
     }
 
 private:
@@ -57,13 +55,14 @@ private:
         std::ifstream ifs(path);
 
         if (!ifs.is_open())
-            throw std::runtime_error(std::string("file <" + path + "> not found").c_str());
+            throw std::runtime_error(std::string("file " + path + " not found").c_str());
 
         return std::string((std::istreambuf_iterator<char>(ifs)),
                            (std::istreambuf_iterator<char>()));
     }
 
     void createContextSSL(const API::ServerConfig &cfg) {
+        //std::cout << cfg.config.at(certificate) << std::endl;
         if (cfg.config.find(certificate) == cfg.config.end() ||
             cfg.config.find(privateKey) == cfg.config.end())
             throw std::runtime_error(std::string("missing config properties (<" + certificate + "> or/and <" + privateKey + ">)").c_str());

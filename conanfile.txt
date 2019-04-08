@@ -1,7 +1,8 @@
 [requires]
 boost/1.68.0@conan/stable
 pugixml/1.9@bincrafters/stable
-OpenSSL/1.1.1b@conan/stable
+libcurl/7.52.1@bincrafters/stable
+OpenSSL/1.0.2m@conan/stable
 
 [generators]
 cmake
