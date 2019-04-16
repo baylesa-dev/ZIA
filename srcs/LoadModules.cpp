@@ -28,6 +28,7 @@ bool Zia::LoadModules::loadAllModules(
 
     for (auto &path : allModulesPath) {
         handle = dlopen(path.c_str(), RTLD_LAZY);
+    //    std::cout << dlerror() << std::endl;
         if (handle) {
             this->_loadmodule.push_back(handle);
             API::Module::factory factory = (API::Module::factory)dlsym(handle, "factory");

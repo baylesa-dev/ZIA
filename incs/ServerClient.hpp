@@ -29,7 +29,7 @@ class ServerClient : public std::enable_shared_from_this<ServerClient>
     ~ServerClient();
     void start();
     void read();
-    void onRead(int len);
+    void onRead();
     void send();
 
   protected:

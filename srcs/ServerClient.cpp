@@ -31,7 +31,7 @@ void Zia::ServerClient::start()
 {
     _requestsHanler->onConnectionStart(_connection, _socket);
     if (_requestsHanler->onConnectionRead(_connection, _socket, _bufferRead, _read))
-        onRead(_read);
+        onRead();
     else
         read();
 }
@@ -43,17 +43,17 @@ void Zia::ServerClient::read()
     _socket.async_read_some(boost::asio::buffer(_buffer, 512),
         [this, self](boost::system::error_code err, int len)
     {
-        if (!err)
-            onRead(len);
+        if (!err) {
+            std::vector<char> buf_tmp(_buffer, _buffer + len);
+            _bufferRead = buf_tmp;
+            onRead();
+        }
         _bufferRead.clear();
     });
 }
 
-void Zia::ServerClient::onRead(int len)
+void Zia::ServerClient::onRead()
 {
-    std::vector<char> buf_tmp(_buffer, _buffer + len);
-    _bufferRead = buf_tmp;
-    std::cout << _bufferRead.size() << std::endl;
     ParseRequest parse;
     parse.parsRequest(_bufferRead);
     _request = parse.getRequest();

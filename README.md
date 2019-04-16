@@ -33,9 +33,7 @@ Check out the [Configuration](./docs/configuration.md) documentation to learn ho
 
 *In alphabetical order:*
 
-- [Adam Goncalves]() - SSL Module creator
 - [Adrien Bayles](https://github.com/baylesa-dev) - Documentalist
-- [Eléonore Goumy]() - SSL Module creator
-- [Fernand Matignon]() - Main Maintainer
+- [Fernand Matignon](https://github.com/FOXCraft40) - Main Maintainer
 - [Louis Schneider](https://github.com/si0ls) - Merger
 - [Marius Michelot](https://github.com/mmichelot) - Second main maintainer
